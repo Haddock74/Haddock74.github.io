@@ -30,10 +30,11 @@
 				return await fetch(request);
 		}
 
-		if (url.origin === origin && url.pathname === "/manifest.json")
+		if (url.origin === origin && url.pathname === "/manifest.json") {
 			return await fetch(request);
+		}
 
-		const response = await caches.match(request, { cacheName }) || await e.preloadResponse || await self.fetch(request);
+		const response = await caches.match(request, { cacheName }) || await e.preloadResponse || await fetch(request);
 		if (origin !== "http://localhost:8000") {
 			try {
 				const cache = await caches.open(cacheName);
